@@ -1,0 +1,19 @@
+@* esto es un comentario *@
+@model Asignatura
+
+@{
+    ViewData["Title"] = "Informacion Asignatura";
+    // recibiendo data que viene del controller 
+    // @Model.nombre
+}
+
+<h1> @ViewData["Title"] </h1>
+<strong> Desde la vista normal </strong>
+<p> 
+    Nombre: @Model.Nombre 
+    Id: @Model.UniqueId
+</p>
+
+<strong> Desde la vista parcial </strong>
+<partial name="AsignaturaSimple"/>
+<p>@ViewData["Fecha"]</p>

@@ -1,0 +1,15 @@
+@* esto es un comentario *@
+@model List<Asignatura>
+
+@{
+    ViewData["Title"] = "Informacion Asignatura";
+    // recibiendo data que viene del controller 
+    // @Model.nombre
+}
+
+<h1> @ViewData["Title"] </h1>
+@foreach (var asignatura in Model)
+{
+    <partial name="AsignaturaSimple" model="asignatura" />
+}
+<p>@ViewData["Fecha"]</p>
