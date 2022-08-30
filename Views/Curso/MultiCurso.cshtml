@@ -1,0 +1,17 @@
+@* esto es un comentario *@
+@model IEnumerable<Curso>
+
+@{
+    ViewData["Title"] = "Informacion Curso";
+    // recibiendo data que viene del controller 
+    // @Model.nombre
+}
+
+<h1> @ViewData["Title"] </h1>
+@* @foreach (var Curso in Model)
+{
+    <partial name="ObjetoEscuelaSimple" model="Curso" />
+} *@
+
+<partial name="ListaObjetoEscuela"/>
+<p>@ViewData["Fecha"]</p>
