@@ -12,44 +12,26 @@ namespace aspNet.Controllers
     public class AlumnoController : Controller
     {
         private readonly ILogger<AlumnoController> _logger;
+        private EscuelaContext _context;
+        // para acceder a dbContent
 
-        public AlumnoController(ILogger<AlumnoController> logger)
+        public AlumnoController(ILogger<AlumnoController> logger, EscuelaContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
         {
-            return View(new Alumno {Nombre = "Vladimir Aiza", Id = Guid.NewGuid().ToString()});
+            ViewBag.cosaDinamica = "La monja"; // para enviar datos que no vienen de un model
+            return View(_context.Alumnos.FirstOrDefault());
         }
         public IActionResult MultiAlumno()
         {
+            ViewBag.cosaDinamica = "La monja desde asignatura";
+            ViewBag.Fecha = DateTime.Now;
 
-            // var listaAlumno = new List<Alumno> () {
-            //     new Alumno {
-            //     Nombre = "Selena Labrayo",
-            //     UniqueId = Guid.NewGuid ().ToString ()
-            //     },
-            //     new Alumno {
-            //     Nombre = "Laura Callejas",
-            //     UniqueId = Guid.NewGuid ().ToString ()
-            //     },
-            //     new Alumno {
-            //     Nombre = "Daniel Olivares",
-            //     UniqueId = Guid.NewGuid ().ToString ()
-            //     },
-            //     new Alumno {
-            //     Nombre = "Rosio Aiza Rodriguez",
-            //     UniqueId = Guid.NewGuid ().ToString ()
-            //     },
-            //     new Alumno {
-            //     Nombre = "Delma Aiza",
-            //     UniqueId = Guid.NewGuid ().ToString ()
-            //     }
-            // };
-
-            var listaAlumno = GenerarAlumnosAlAzar();
-            return View("MultiAlumno", listaAlumno);
+            return View("MultiAlumno", _context.Alumnos);
         }
         private List<Alumno> GenerarAlumnosAlAzar()
         {
