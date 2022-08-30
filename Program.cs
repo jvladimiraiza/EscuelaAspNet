@@ -3,10 +3,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<EscuelaContext>(p => p.UseInMemoryDatabase("escueladb")); // congiracion para la bd en memoria
-// var serverVersion = new MySqlServerVersion(new Version(6, 0, 2));
-// builder.Services.AddDbContext<EscuelaContext>(options =>
-// options.UseMySql(builder.Configuration.GetConnectionString("escuelaDb"), serverVersion));
+// builder.Services.AddDbContext<EscuelaContext>(p => p.UseInMemoryDatabase("escueladb")); // congiracion para la bd en memoria
+var serverVersion = new MySqlServerVersion(new Version(6, 0, 2));
+builder.Services.AddDbContext<EscuelaContext>(options =>
+options.UseMySql(builder.Configuration.GetConnectionString("escuelaDb"), serverVersion));
 
 var app = builder.Build();
 
