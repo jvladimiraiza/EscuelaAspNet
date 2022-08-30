@@ -30,7 +30,7 @@ namespace aspNet.Controllers
             //     UniqueId = Guid.NewGuid().ToString(),
             //     Nombre = "Programacion"
             // };
-            return View(new Asignatura {Nombre = "Programacion", UniqueId = Guid.NewGuid().ToString()});
+            return View(new Asignatura {Nombre = "Programacion", Id = Guid.NewGuid().ToString()});
         }
         public IActionResult MultiAsignatura()
         {
@@ -48,23 +48,23 @@ namespace aspNet.Controllers
             var listaAsignaturas = new List<Asignatura> () {
                 new Asignatura {
                 Nombre = "Matemáticas",
-                UniqueId = Guid.NewGuid ().ToString ()
+                Id = Guid.NewGuid ().ToString ()
                 },
                 new Asignatura {
                 Nombre = "Educación Física",
-                UniqueId = Guid.NewGuid ().ToString ()
+                Id = Guid.NewGuid ().ToString ()
                 },
                 new Asignatura {
                 Nombre = "Castellano",
-                UniqueId = Guid.NewGuid ().ToString ()
+                Id = Guid.NewGuid ().ToString ()
                 },
                 new Asignatura {
                 Nombre = "Ciencias Naturales",
-                UniqueId = Guid.NewGuid ().ToString ()
+                Id = Guid.NewGuid ().ToString ()
                 },
                 new Asignatura {
                 Nombre = "Programacion",
-                UniqueId = Guid.NewGuid ().ToString ()
+                Id = Guid.NewGuid ().ToString ()
                 }
             };
             // return View(listaAsignaturas);
