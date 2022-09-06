@@ -6,12 +6,13 @@
     // recibiendo data que viene del controller 
     // @Model.nombre
 }
-
-<h1> @ViewData["Title"] </h1>
-@* @foreach (var Curso in Model)
-{
-    <partial name="ObjetoEscuelaSimple" model="Curso" />
-} *@
-
-<partial name="ListaObjetoEscuela"/>
-<p>@ViewData["Fecha"]</p>
+<div class="container">
+    <h1> @ViewData["Title"] </h1>
+    @* @foreach (var Curso in Model)
+    {
+        <partial name="ObjetoEscuelaSimple" model="Curso" />
+    } *@
+    <button class="btn btn-success">Nuevo</button>
+    <partial name="ListaObjetoEscuela"/>
+    <p>@ViewData["Fecha"]</p>
+</div>

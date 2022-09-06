@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace aspNet.Controllers
 {
+    // [Route("[controller]")]
     public class AsignaturaController : Controller
     {
         private readonly ILogger<AsignaturaController> _logger;
@@ -19,26 +20,31 @@ namespace aspNet.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        // public IActionResult Index()
+        // {
+        //     return View(_context.Asignaturas.FirstOrDefault());
+        // }
+        // [HttpGet("{asignaturaId}")]
+        [Route("Asignatura/Index")]
+        [Route("Asignatura/Index/{asignaturaId}")]
+        public IActionResult Index(string asignaturaId)
         {
-            // var asignatura = new Asignatura();
-            // asignatura.UniqueId = Guid.NewGuid().ToString();
-            // asignatura.Nombre = "Programacion";
-            // ViewBag.cosaDinamica = "La monja"; // para enviar datos que no vienen de un model
-            // ViewBag.Fecha = DateTime.Now;
-
-            // var asignatura = new Asignatura {
-            //     UniqueId = Guid.NewGuid().ToString(),
-            //     Nombre = "Programacion"
-            // };
-            return View(_context.Asignaturas.FirstOrDefault());
+            if (!string.IsNullOrWhiteSpace(asignaturaId))
+            {
+                var asignatura = from asig in _context.Asignaturas
+                where asig.Id == asignaturaId
+                select asig; 
+                return View(asignatura.SingleOrDefault());
+            } else {
+                return View("MultiAsignatura", _context.Asignaturas);
+            }
         }
+        // [HttpGet]
         public IActionResult MultiAsignatura()
         {
 
             ViewBag.cosaDinamica = "La monja desde asignatura";
             ViewBag.Fecha = DateTime.Now;
-            // return View(listaAsignaturas);
             return View("MultiAsignatura", _context.Asignaturas);
         }
     }

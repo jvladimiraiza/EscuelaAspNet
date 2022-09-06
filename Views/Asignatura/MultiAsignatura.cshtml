@@ -7,11 +7,13 @@
     // @Model.nombre
 }
 
-<h1> @ViewData["Title"] </h1>
-@* @foreach (var asignatura in Model)
-{
-    <partial name="ObjetoEscuelaSimple" model="asignatura" />
-} *@
+<div class="container">
+    <h1> @ViewData["Title"] </h1>
+    @* @foreach (var asignatura in Model)
+    {
+        <partial name="ObjetoEscuelaSimple" model="asignatura" />
+    } *@
 
-<partial name="ListaObjetoEscuela"/>
-<p>@ViewData["Fecha"]</p>
+    <partial name="ListaObjetoEscuela"/>
+    <p>@ViewData["Fecha"]</p>
+</div>

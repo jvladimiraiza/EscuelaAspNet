@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace aspNet.Controllers
 {
+
     public class AlumnoController : Controller
     {
         private readonly ILogger<AlumnoController> _logger;
@@ -20,15 +21,24 @@ namespace aspNet.Controllers
             _logger = logger;
             _context = context;
         }
-
-        public IActionResult Index()
+        [Route("Alumno/Index")]
+        [Route("Alumno/Index/{alumnoId}")]
+        public IActionResult Index(string alumnoId)
         {
-            ViewBag.cosaDinamica = "La monja"; // para enviar datos que no vienen de un model
-            return View(_context.Alumnos.FirstOrDefault());
+            if (!string.IsNullOrWhiteSpace(alumnoId)) {
+                ViewBag.cosaDinamica = "La monja"; // para enviar datos que no vienen de un model
+                var alumno = from alum in _context.Alumnos
+                where alum.Id == alumnoId
+                select alum;
+                return View(alumno.SingleOrDefault());
+            } else {
+                return View("MultiAlumno", _context.Alumnos);
+            }
+            //return View(_context.Alumnos.FirstOrDefault());
         }
         public IActionResult MultiAlumno()
         {
-            ViewBag.cosaDinamica = "La monja desde asignatura";
+            ViewBag.cosaDinamica = "La monja desde Alumno";
             ViewBag.Fecha = DateTime.Now;
 
             return View("MultiAlumno", _context.Alumnos);

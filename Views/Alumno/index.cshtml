@@ -6,14 +6,15 @@
     // recibiendo data que viene del controller 
     // @Model.nombre
 }
+<div class="container">
+    <h1> @ViewData["Title"] </h1>
+    <strong> Desde la vista normal </strong>
+    <p> 
+        Nombre: @Model.Nombre 
+        Id: @Model.Id
+    </p>
 
-<h1> @ViewData["Title"] </h1>
-<strong> Desde la vista normal </strong>
-<p> 
-    Nombre: @Model.Nombre 
-    Id: @Model.Id
-</p>
-
-<strong> Desde la vista parcial </strong>
-<partial name="ObjetoEscuelaSimple"/>
-<p>@ViewData["Fecha"]</p>
+    <strong> Desde la vista parcial </strong>
+    <partial name="ObjetoEscuelaSimple"/>
+    <p>@ViewData["Fecha"]</p>
+</div>

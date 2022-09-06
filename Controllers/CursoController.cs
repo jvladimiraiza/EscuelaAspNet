@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using aspNet.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -18,9 +19,15 @@ namespace aspNet.Controllers
             _logger = logger;
             _context = context;
         }
-
-        public IActionResult Index()
+        [Route("Curso/Index")]
+        [Route("Curso/Index/{cursoId}")]
+        public IActionResult Index(string cursoId)
         {
+            if (!string.IsNullOrWhiteSpace(cursoId)) {
+                var curso = _context.Cursos.Find(cursoId);
+            } else {
+                return View("MultiCurso", _context.Cursos);
+            }
             return View(_context.Cursos.FirstOrDefault());
         }
         public IActionResult MultiCurso()
@@ -30,6 +37,21 @@ namespace aspNet.Controllers
             ViewBag.Fecha = DateTime.Now;
             // return View(listaAsignaturas);
             return View("MultiCurso", _context.Cursos);
+        }
+        public IActionResult Create()
+        {
+            ViewBag.Fecha = DateTime.Now;
+            return View("create");
+        }
+        [HttpPost]
+        public IActionResult Create(Curso curso)
+        {
+            ViewBag.Fecha = DateTime.Now;
+            var escuela = _context.Escuelas.FirstOrDefault();
+            curso.EscuelaId = escuela.Id;
+            _context.Cursos.Add(curso);
+            _context.SaveChanges();
+            return View();
         }
     }
 }
