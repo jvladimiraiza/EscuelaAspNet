@@ -1,39 +1,38 @@
 @model Curso
 @{
     ViewData["Title"] = "Crear Curso";
-    // recibiendo data que viene del controller 
-    // @Model.nombre
 }
-
-<h1> Curso @ViewData["Title"] </h1>
-@* <form method="post">
-    <div>
-        <label asp-for="Nombre"></label>
-        <input type="text" asp-for="Nombre">
-    </div>
-    <div>
-        <label asp-for="Direccion"></label>
-        <input type="text" asp-for="Direccion">
-    </div>
-    <div>
-        <label asp-for="Jornada"></label>
-        <input type="text" asp-for="Jornada">
-    </div>
-    <input type="submit" name="" id="">
-</form> *@
-<form method="post">
-  <div class="mb-3">
-    <label for="Nombre" class="form-label">Nombre</label>
-    <input type="text" class="form-control" id="Nombre" aria-describedby="cursoHelp">
-    <div id="cursoHelp" class="form-text">Agregue un curso.</div>
+@* mostrar resumen de todas las validaciones *@
+<div class="container">
+  <h1> Curso @ViewData["Title"] </h1>
+  <div class="row">
+    <div asp-validation-summary="All"></div>
+    <form method="post">
+      <div class="mb-3">
+        <label asp-for="Nombre" class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="Nombre"
+        asp-for="Nombre"
+        aria-describedby="cursoHelp">
+        <div id="cursoHelp" class="form-text">Agregue un curso.</div>
+      </div>
+      <div class="mb-3">
+        <label asp-for="Direccion" class="form-label">Direccion</label>
+        <input type="text" class="form-control"
+        asp-for="Direccion">
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="jornada">Verificado</label>
+        @Html.DropDownList(
+          "Jornada", Html.GetEnumSelectList<TiposJornada>(),
+          "Seleccione una Jornada",
+          new {@class = "form-control"}
+        );
+      </div>
+      <div class="row">
+        <div>
+          <button type="submit" class="btn btn-primary">Enviar</button>
+        </div>
+      </div>
+    </form>
   </div>
-  <div class="mb-3">
-    <label for="Dirreccion" class="form-label">Direccion</label>
-    <input type="text" class="form-control" id="Dirreccion">
-  </div>
-  <div class="mb-3">
-    <label class="form-label" for="jornada">Verificado</label>
-    <input type="text" class="form-control" id="jornada">
-  </div>
-  <button type="submit" class="btn btn-primary">Enviar</button>
-</form>
+</div>
