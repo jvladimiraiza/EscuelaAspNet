@@ -59,8 +59,9 @@
         }
     </tbody>
 </table>
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
+
         function showModal(id) {
             $('#modalDelete' + id).modal('show');
         }
@@ -70,11 +71,11 @@
                 url: "Delete",
                 data: { id: id}
             }).done(function(msg) {
-                alert("El registro se elimino correctamente:");
+                swal("OK!", "El registro se elimino correctamente!", "success");
                 document.getElementById(`row_${id}`).remove();
             })
             .fail(function(){
-                alert("ERROR !!!");
+                swal ( "Oops" ,  "Ocurrio un Error" ,  "error" );
             });
         }
     </script>
