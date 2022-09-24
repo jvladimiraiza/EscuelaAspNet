@@ -12,7 +12,15 @@
     {
         <partial name="ObjetoEscuelaSimple" model="Curso" />
     } *@
-    <button class="btn btn-success">Nuevo</button>
+    <a class="btn btn-success" asp-controller="Curso"
+    asp-action="Create">Nuevo
+    <i class="icon-plus"></i>
+    </a>
     <partial name="ListaObjetoEscuela"/>
     <p>@ViewData["Fecha"]</p>
+    <div class="row">
+        <h2>
+            @ViewData["mensaje"]
+        </h2>
+    </div>
 </div>

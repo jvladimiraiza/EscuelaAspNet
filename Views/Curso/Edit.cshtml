@@ -1,16 +1,17 @@
 @model Curso
 @{
-    ViewData["Title"] = "Crear Curso";
+    ViewData["Title"] = "Editar Curso";
 }
 @* mostrar resumen de todas las validaciones *@
 <div class="container">
   <h1> Curso @ViewData["Title"] </h1>
+  <a class="btn btn-success" asp-controller="Curso"
+    asp-action="Index">Regresar
+    <i class="icon-plus"></i>
+    </a>
   <div class="row">
-      <a class="btn btn-success" asp-controller="Curso"
-        asp-action="Index">Regresar
-      </a>
-    @* <div asp-validation-summary="All"></div> *@
-    <form method="post">
+    <div asp-validation-summary="All"></div>
+    <form asp-action="Edit" method="post">
       <div class="mb-3">
         <label asp-for="Nombre" class="form-label"></label>
         <input type="text" class="form-control" id="Nombre"
@@ -37,5 +38,8 @@
         </div>
       </div>
     </form>
+  </div>
+  <div class="row">
+    <p>@ViewData["mensaje"]</p>
   </div>
 </div>
