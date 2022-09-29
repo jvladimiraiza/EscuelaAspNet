@@ -13,7 +13,7 @@ namespace aspNet.Models
         public string Dirección { get; set; }
 
         public TiposEscuela TipoEscuela { get; set; }
-        public List<Curso> Cursos { get; set; }
+        public List<Curso>? Cursos { get; set; }
 
         public Escuela(string nombre, int año) => (Nombre, AnioCreacion) = (nombre, año);
 
