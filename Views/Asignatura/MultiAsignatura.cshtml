@@ -12,8 +12,11 @@
     @* @foreach (var asignatura in Model)
     {
         <partial name="ObjetoEscuelaSimple" model="asignatura" />
-    } *@
-
+    } *@ 
+    <a class="btn btn-success" asp-controller="Asignatura"
+    asp-action="Create">Nuevo
+    <i class="icon-plus"></i>
+    </a>
     <partial name="ListaObjetoEscuela"/>
     <p>@ViewData["Fecha"]</p>
 </div>

@@ -1,0 +1,27 @@
+@model Asignatura
+@{
+    ViewData["Title"] = "Crear Asignatura";
+}
+<div class="container">
+    <h1> Curso @ViewData["Title"] </h1>
+    @* <div asp-validation-summary="All"></div>  *@
+    <div class="row">
+        <a class="btn btn-success" asp-controller="Asignatura"
+            asp-action="Index">Regresar
+        </a>
+        <form method="post" asp-action="Create">
+            <div class="form-group">
+                <label asp-for="Nombre" class="form-label"></label>
+                <input type="text" class="form-control" id="Nombre"
+                asp-for="Nombre">
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="curso">Curso</label>
+                <select asp-for="CursoId" class="form-control" asp-items="ViewBag.cursoList"></select>
+            </div>
+            <p class="text-danger">@ViewBag.Mensaje</p>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+    </div>
+</div>

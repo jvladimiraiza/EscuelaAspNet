@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using aspNet.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace aspNet.Controllers
@@ -58,6 +60,74 @@ namespace aspNet.Controllers
                     };
 
             return listaAlumnos.OrderBy((al) => al.Id).ToList();
+        }
+        [HttpGet]
+        public IActionResult create()
+        {
+            ViewData["cursoList"] = new SelectList(_context.Cursos, "Id", "Nombre");
+            return View();
+        }
+        [HttpPost]
+        public IActionResult create([Bind("Nombre, Apellidos, CursoId")] Alumno alumno)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(alumno);
+                _context.SaveChanges();
+                ViewBag.Mensaje = "Se creo el alumno correctamente";
+                return RedirectToAction(nameof(Index));
+            }
+            ViewBag.Mensaje = "Ocurrio un erro al guardar el registro !!!";
+            ViewData["cursoList"] = new SelectList(_context.Cursos, "Id", "Nombre", alumno.CursoId);
+            return RedirectToAction(nameof(Index));
+        }
+        [HttpGet]
+        public async Task<IActionResult> Edit(string Id)
+        {
+            var alumno = await _context.Alumnos.FindAsync(Id);
+            if (Id == null || alumno == null)
+            {
+                ViewBag.mensaje = "El recurso que desea acceder no existe";
+                return NotFound();
+            }
+            ViewData["cursoList"] = new SelectList(_context.Cursos, "Id", "Nombre", alumno.CursoId);
+            return View(alumno);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(string id, [Bind("Nombre, Apellidos, CursoId, Id")] Alumno alumno)
+        {
+            if (id != alumno.Id)
+            {
+                return NotFound();
+            }
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(alumno);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    throw;
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["cursoList"] = new SelectList(_context.Cursos, "Id", "Nombre", alumno.CursoId);
+            return View(alumno);
+        }
+        public async Task<IActionResult> Delete(string id)
+        {
+            var alumno = _context.Alumnos.Find(id);
+            if (alumno == null )
+            {
+                ViewBag.mensaje = "El registro no existe o fue eliminado";
+            } else {
+                _context.Alumnos.Remove(alumno);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction(nameof(Index));
         }
     }
 }

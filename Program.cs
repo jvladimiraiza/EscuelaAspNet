@@ -33,6 +33,7 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseStatusCodePagesWithRedirects("/Home/PageNoEncontrada?statusCode={0}");
 app.UseStaticFiles();
 
 app.UseRouting();

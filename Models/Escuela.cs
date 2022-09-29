@@ -18,8 +18,8 @@ namespace aspNet.Models
         public Escuela(string nombre, int año) => (Nombre, AnioCreacion) = (nombre, año);
 
         public Escuela(string nombre, int año, 
-                       TiposEscuela tipo, 
-                       string pais = "", string ciudad = "") : base()
+            TiposEscuela tipo, 
+            string pais = "", string ciudad = "") : base()
         {
             (Nombre, AnioCreacion) = (nombre, año);
             Pais = pais;

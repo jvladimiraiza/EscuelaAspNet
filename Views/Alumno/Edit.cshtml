@@ -1,0 +1,37 @@
+@model Alumno
+@{
+    ViewData["Title"] = "Editar Alumno";
+}
+<div class="container">
+    <h1> @ViewData["Title"] </h1>
+    <div class="ml-3 pt-2"><span class="font-weight-bold">N°: @Model.Id</span></div>
+    <div class="row">
+        <a class="btn btn-success" asp-controller="Alumno"
+            asp-action="Index">Regresar
+        </a>
+        <form method="post" asp-action="Edit">
+            <div class="form-group">
+                <label asp-for="Nombre" class="form-label"></label>
+                <input type="text" class="form-control" id="Nombre"
+                asp-for="Nombre">
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Apellidos" class="form-label"></label>
+                <input type="text" class="form-control" id="Apellidos"
+                asp-for="Apellidos">
+                <span asp-validation-for="Apellidos" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="curso">Curso</label>
+                <select asp-for="CursoId" class="form-control" asp-items="ViewBag.cursoList"></select>
+            </div>
+            <div class="form-group">
+                <input type="hidden" class="form-control" id="Id"
+                asp-for="Id">
+            </div>
+            <p class="text-danger">@ViewBag.Mensaje</p>
+            <button type="submit" class="btn btn-primary">Modificar</button>
+        </form>
+    </div>
+</div>

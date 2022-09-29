@@ -111,6 +111,7 @@ public class EscuelaContext: DbContext
             select new Alumno { 
                 Nombre = $"{n1} {n2} {a1}" ,
                 Id = Guid.NewGuid().ToString(),
+                Apellidos = a1,
                 CursoId = curso.Id
                 };
 
